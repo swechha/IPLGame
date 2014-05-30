@@ -328,36 +328,3 @@ function getCurrentBowlersList() {
 	return currentBowlers;
 }
 
-//setters
-function setBatsmenList(list) {
-	batsmen_list = list;
-}
-
-function setWicketKeepersList(list) {
-	wicketKeepers_list = list;
-}
-
-function setAllRoundersList(list) {
-	allRounders_list = list;
-}
-
-function setBowlersList(list) {
-	bowlers_list = list;
-}
-
-function setCurrentBatsmenList() {
-	currentBatsmen = list;
-}
-
-function setCurrentWicketKeepersList(list) {
-	currentWicketKeepers = list;
-}
-
-function setCurrentAllRoundersList(list) {
-	currentAllRounders = list;
-}
-
-function setCurrentBowlersList(list) {
-	currentBowlers = list;
-}
-
