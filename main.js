@@ -45,7 +45,7 @@ function init() {
 		restoreComposition();
 	}
 	if (sessionStorage.getItem("avail_money")) {
-		avail_money = sessionStorage.getItem("avail_money");
+		avail_money = Number(sessionStorage.getItem("avail_money"));
 		updateMoneyLabel();
 	}
 	if (sessionStorage.getItem("team_name")) {
