@@ -12,7 +12,7 @@
 <body>
 	<p id="money"> </p>
 	<!-- Inputs: Team Name and Composition -->
-	<p> Your team name here <input type="text" value=""> </p>
+	<p> Your team name here <input id="team_name" type="text" value="" onchange="teamNameChanged()"> </p>
 	<p>
 		Select your team composition
 		<select id="compositions" onchange="changeComposition()">
@@ -25,6 +25,7 @@
 		<tr>
 			<td width="15%">
 				<h3> Batsmen </h3>
+				<div id="chosen_batsmen"></div>
 				<p id="chosen_batsman1"> </p>
 				<p id="chosen_batsman2"> </p>
 				<p id="chosen_batsman3"> </p>
@@ -35,6 +36,7 @@
 			</td>
 			<td width="15%">
 				<h3> Wicket Keepers </h3>
+				<div id="chosen_wicketKeepers"></div>
 				<p id="chosen_wicketKeeper1"> </p>
 				<p id="chosen_wicketKeeper2"> </p>
 				<p id="chosen_wicketKeeper3"> </p>
@@ -42,6 +44,7 @@
 			</td>
 			<td width="15%">
 				<h3> All Rounders </h3>
+				<div id="chosen_allRounders"></div>
 				<p id="chosen_allRounder1"> </p>
 				<p id="chosen_allRounder2"> </p>
 				<p id="chosen_allRounder3"> </p>
@@ -50,6 +53,7 @@
 			</td>
 			<td width="15%">
 				<h3> Bowlers </h3>
+				<div id="chosen_bowlers"></div>
 				<p id="chosen_bowler1"> </p>
 				<p id="chosen_bowler2"> </p>
 				<p id="chosen_bowler3"> </p>
@@ -58,48 +62,95 @@
 				<p id="chosen_bowler6"> </p>
 			</td>
 			<td width="30%" align="right">
-				<p>
-				<input type="checkbox" value="bastman 1" cost="20" id="batsman1" onchange="batsmenChanged(1)"> batsman 1 <br>
-				<input type="checkbox" value="batsman 2" cost="2" id="batsman2" onchange="batsmenChanged(2)"> batsman 2 <br>
-				<input type="checkbox" value="batsman 3" cost="8" id="batsman3" onchange="batsmenChanged(3)"> batsman 3 <br>
-				<input type="checkbox" value="batsman 4" cost="15" id="batsman4" onchange="batsmenChanged(4)"> batsman 4 <br>
-				<input type="checkbox" value="batsman 5" cost="12" id="batsman5" onchange="batsmenChanged(5)"> batsman 5 <br>
-				<input type="checkbox" value="batsman 6" cost="11" id="batsman6" onchange="batsmenChanged(6)"> batsman 6 <br>
-				<input type="checkbox" value="batsman 7" cost="32" id="batsman7" onchange="batsmenChanged(7)"> batsman 7 <br>
-
-				<!-- Wicket Keepers -->
-				<input type="checkbox" value="wicket keeper 1" cost="14" id="wicketKeeper1" onchange="wicketKeepersChanged(1)"> wicket keeper 1 <br>
-				<input type="checkbox" value="wicket keeper 2" cost="6" id="wicketKeeper2" onchange="wicketKeepersChanged(2)"> wicket keeper 2 <br>
-				<input type="checkbox" value="wicket keeper 3" cost="10" id="wicketKeeper3" onchange="wicketKeepersChanged(3)"> wicket keeper 3 <br>
-				<input type="checkbox" value="wicket keeper 4" cost="6" id="wicketKeeper4" onchange="wicketKeepersChanged(4)"> wicket keeper 4 <br>
-
-				<!-- All Rounders -->
-				<input type="checkbox" value="all rounder 1" cost="34" id="allRounder1" onchange="allRoundersChanged(1)"> all rounder 1 <br>
-				<input type="checkbox" value="all rounder 2" cost="10" id="allRounder2" onchange="allRoundersChanged(2)"> all rounder 2 <br>
-				<input type="checkbox" value="all rounder 3" cost="12" id="allRounder3" onchange="allRoundersChanged(3)"> all rounder 3 <br>
-				<input type="checkbox" value="all rounder 4" cost="18" id="allRounder4" onchange="allRoundersChanged(4)"> all rounder 4 <br>
-				<input type="checkbox" value="all rounder 5" cost="24" id="allRounder5" onchange="allRoundersChanged(5)"> all rounder 5 <br>
-
-				<!-- Bowlers -->
-				<input type="checkbox" value="bowler 1" cost="15" id="bowler1" onchange="bowlersChanged(1)"> bowler 1 <br>
-				<input type="checkbox" value="bowler 2" cost="21" id="bowler2" onchange="bowlersChanged(2)"> bowler 2 <br>
-				<input type="checkbox" value="bowler 3" cost="20" id="bowler3" onchange="bowlersChanged(3)"> bowler 3 <br>
-				<input type="checkbox" value="bowler 4" cost="11" id="bowler4" onchange="bowlersChanged(4)"> bowler 4 <br>
-				<input type="checkbox" value="bowler 5" cost="4" id="bowler5" onchange="bowlersChanged(5)"> bowler 5 <br>
-				<input type="checkbox" value="bowler 6" cost="9" id="bowler6" onchange="bowlersChanged(6)"> bowler 6 <br>
-			</p>
+				<!-- List of Players -->
+				<p class="ui_list_container"> </p>
 			</td>
 		</tr>
 	</table>
 
+	<input type="button" value="Submit" onclick="updateTable()">
+
 	<br> <br>
+	
+	<!-- Building UI based on JQuery 
+	input: type=checkbox, ID={1,2,...} onchange=bastmenChanged(ID)
+	-->
+	<script type="text/javascript">
 
-	<!--List of Players to select from -->
-	<div id="list">
-		<!-- Batsmen -->
-		
+		var batsmen_list = getBatsmenList();
+		var wicketKeepers_list = getWicketKeepersList();
+		var allRounders_list = getAllRoundersList();
+		var bowlers_list = getBowlersList();
+		document.getElementById("compositions").selectedIndex = 0;
 
-	</div>
+		$(".ui_list_container").append("<h3>Batsmen");
+		for (var i = 0; i < batsmen_list.length; i++) 
+		{
+			var input_tag = "<input type='checkbox' class='chkb' id='batsman".concat((i+1).toString(), "' onchange='batsmenChanged(", (i+1).toString(), ")'>", batsmen_list[i].name, ", ", batsmen_list[i].cost, "<br>");
+			$(".ui_list_container").append(input_tag);
+		}
+		$(".ui_list_container").append("<h3>Wicket Keepers");
+		for (var i = 0; i < wicketKeepers_list.length; i++) 
+		{
+			var input_tag = "<input type='checkbox' class='chkb' id='wicketKeeper".concat((i+1).toString(), "' onchange='wicketKeepersChanged(", (i+1).toString(), ")'>", wicketKeepers_list[i].name, ", ", wicketKeepers_list[i].cost, "<br>");
+			$(".ui_list_container").append(input_tag);
+		}
+		$(".ui_list_container").append("<h3>All Rounders");
+		for (var i = 0; i < allRounders_list.length; i++) 
+		{
+			var input_tag = "<input type='checkbox' class='chkb' id='allRounder".concat((i+1).toString(), "' onchange='allRoundersChanged(", (i+1).toString(), ")'>", allRounders_list[i].name, ", ", allRounders_list[i].cost, "<br>");
+			$(".ui_list_container").append(input_tag);
+		}
+		$(".ui_list_container").append("<h3>Bowlers");
+		for (var i = 0; i < bowlers_list.length; i++) 
+		{
+			var input_tag = "<input type='checkbox' class='chkb' id='bowler".concat((i+1).toString(), "' onchange='bowlersChanged(", (i+1).toString(), ")'>", bowlers_list[i].name, ", ", bowlers_list[i].cost, "<br>");
+			$(".ui_list_container").append(input_tag);
+		}
+		updateMoneyLabel();
+	</script>
+
+	<script type="text/javascript">
+		function updateTable() {
+			if (!inputsAreComplete()) {
+				alert("Please enter the team name and select all Players");
+				return;
+			}
+
+			var currentBatsmen_list = getCurrentBatsmenList();
+			var currentWicketKeepers_list = getCurrentWicketKeepersList();
+			var currentAllRounders_list = getCurrentAllRoundersList();
+			var currentBowlers_list = getCurrentBowlersList();
+
+			for (var i = 0; i < currentBatsmen_list.length; i++) 
+			{
+				var chosen_batsman = document.getElementById("chosen_batsman".concat(i+1));
+				chosen_batsman.innerHTML = currentBatsmen_list[i].name;
+			}
+			for (var i = 0; i < currentWicketKeepers_list.length; i++) 
+			{
+				var chosen_wicketKeeper = document.getElementById("chosen_wicketKeeper".concat(i+1));
+				chosen_wicketKeeper.innerHTML = currentWicketKeepers_list[i].name;
+			}
+			for (var i = 0; i < currentAllRounders_list.length; i++)
+			{
+				var chosen_allRounder = document.getElementById("chosen_allRounder".concat(i+1));
+				chosen_allRounder.innerHTML = currentAllRounders_list[i].name;
+			}
+			for (var i = 0; i < currentBowlers_list.length; i++) 
+			{
+				var chosen_bowler = document.getElementById("chosen_bowler".concat(i+1));
+				chosen_bowler.innerHTML = currentBowlers_list[i].name;
+			}
+		}
+	</script>
+
+	<script type="text/javascript">
+		$(window).bind("load", function() {
+			init();
+		});
+	</script>
+
 </body>
 
 </html>
