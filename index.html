@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<title>IPL</title>
+<head>
+	<script type="text/javascript" src="main.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+<body>
+	<p id="money"> </p>
+	<!-- Inputs: Team Name and Composition -->
+	<p> Your team name here <input type="text" value=""> </p>
+	<p>
+		Select your team composition
+		<select id="compositions" onchange="changeComposition()">
+			<option value=1> 3 batsmen, 1 wicketkeeper, 2 all rounders, 2 bowlers </option>
+			<option value=2> 3 batsmen, 1 wicketkeeper, 1 all rounders, 3 bowlers </option>
+			<option value=3> 4 batsmen, 1 wicketkeeper, 1 all rounders, 2 bowlers </option>
+		</select>
+	</p>
+	<table>
+		<tr>
+			<td width="15%">
+				<h3> Batsmen </h3>
+				<p id="chosen_batsman1"> </p>
+				<p id="chosen_batsman2"> </p>
+				<p id="chosen_batsman3"> </p>
+				<p id="chosen_batsman4"> </p>
+				<p id="chosen_batsman5"> </p>
+				<p id="chosen_batsman6"> </p>
+				<p id="chosen_batsman7"> </p>
+			</td>
+			<td width="15%">
+				<h3> Wicket Keepers </h3>
+				<p id="chosen_wicketKeeper1"> </p>
+				<p id="chosen_wicketKeeper2"> </p>
+				<p id="chosen_wicketKeeper3"> </p>
+				<p id="chosen_wicketKeeper4"> </p>
+			</td>
+			<td width="15%">
+				<h3> All Rounders </h3>
+				<p id="chosen_allRounder1"> </p>
+				<p id="chosen_allRounder2"> </p>
+				<p id="chosen_allRounder3"> </p>
+				<p id="chosen_allRounder4"> </p>
+				<p id="chosen_allRounder5"> </p>
+			</td>
+			<td width="15%">
+				<h3> Bowlers </h3>
+				<p id="chosen_bowler1"> </p>
+				<p id="chosen_bowler2"> </p>
+				<p id="chosen_bowler3"> </p>
+				<p id="chosen_bowler4"> </p>
+				<p id="chosen_bowler5"> </p>
+				<p id="chosen_bowler6"> </p>
+			</td>
+			<td width="30%" align="right">
+				<p>
+				<input type="checkbox" value="bastman 1" cost="20" id="batsman1" onchange="batsmenChanged(1)"> batsman 1 <br>
+				<input type="checkbox" value="batsman 2" cost="2" id="batsman2" onchange="batsmenChanged(2)"> batsman 2 <br>
+				<input type="checkbox" value="batsman 3" cost="8" id="batsman3" onchange="batsmenChanged(3)"> batsman 3 <br>
+				<input type="checkbox" value="batsman 4" cost="15" id="batsman4" onchange="batsmenChanged(4)"> batsman 4 <br>
+				<input type="checkbox" value="batsman 5" cost="12" id="batsman5" onchange="batsmenChanged(5)"> batsman 5 <br>
+				<input type="checkbox" value="batsman 6" cost="11" id="batsman6" onchange="batsmenChanged(6)"> batsman 6 <br>
+				<input type="checkbox" value="batsman 7" cost="32" id="batsman7" onchange="batsmenChanged(7)"> batsman 7 <br>
+
+				<!-- Wicket Keepers -->
+				<input type="checkbox" value="wicket keeper 1" cost="14" id="wicketKeeper1" onchange="wicketKeepersChanged(1)"> wicket keeper 1 <br>
+				<input type="checkbox" value="wicket keeper 2" cost="6" id="wicketKeeper2" onchange="wicketKeepersChanged(2)"> wicket keeper 2 <br>
+				<input type="checkbox" value="wicket keeper 3" cost="10" id="wicketKeeper3" onchange="wicketKeepersChanged(3)"> wicket keeper 3 <br>
+				<input type="checkbox" value="wicket keeper 4" cost="6" id="wicketKeeper4" onchange="wicketKeepersChanged(4)"> wicket keeper 4 <br>
+
+				<!-- All Rounders -->
+				<input type="checkbox" value="all rounder 1" cost="34" id="allRounder1" onchange="allRoundersChanged(1)"> all rounder 1 <br>
+				<input type="checkbox" value="all rounder 2" cost="10" id="allRounder2" onchange="allRoundersChanged(2)"> all rounder 2 <br>
+				<input type="checkbox" value="all rounder 3" cost="12" id="allRounder3" onchange="allRoundersChanged(3)"> all rounder 3 <br>
+				<input type="checkbox" value="all rounder 4" cost="18" id="allRounder4" onchange="allRoundersChanged(4)"> all rounder 4 <br>
+				<input type="checkbox" value="all rounder 5" cost="24" id="allRounder5" onchange="allRoundersChanged(5)"> all rounder 5 <br>
+
+				<!-- Bowlers -->
+				<input type="checkbox" value="bowler 1" cost="15" id="bowler1" onchange="bowlersChanged(1)"> bowler 1 <br>
+				<input type="checkbox" value="bowler 2" cost="21" id="bowler2" onchange="bowlersChanged(2)"> bowler 2 <br>
+				<input type="checkbox" value="bowler 3" cost="20" id="bowler3" onchange="bowlersChanged(3)"> bowler 3 <br>
+				<input type="checkbox" value="bowler 4" cost="11" id="bowler4" onchange="bowlersChanged(4)"> bowler 4 <br>
+				<input type="checkbox" value="bowler 5" cost="4" id="bowler5" onchange="bowlersChanged(5)"> bowler 5 <br>
+				<input type="checkbox" value="bowler 6" cost="9" id="bowler6" onchange="bowlersChanged(6)"> bowler 6 <br>
+			</p>
+			</td>
+		</tr>
+	</table>
+
+	<br> <br>
+
+	<!--List of Players to select from -->
+	<div id="list">
+		<!-- Batsmen -->
+		
+
+	</div>
+</body>
+
+</html>

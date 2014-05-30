@@ -1,0 +1,35 @@
+html,body {
+	height:100%;
+};
+
+div.list {
+	padding: 50px 20px 20px 20px;
+}
+
+td {
+	padding: 10px 20px 20px 10px;
+}
+
+h1 {
+	color: #000000;
+	font-family: arial, sans-serif;
+	font-size: 38px;
+}
+
+h2 {
+	color: #000000;
+	font-family: arial, sans-serif;
+	font-size: 28px;
+}
+
+h3 {
+	color: #000000;
+	font-family: arial, sans-serif;
+	font-size: 18px;
+}
+
+p {
+	color: #000000;
+	font-family: arial, sans-serif;
+	font-size: 18px;
+}
